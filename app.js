@@ -10,8 +10,8 @@ shipE: [],//5x1
 Health: 16,
 
 placement(x, shiptype, rotate) {// requires collision logic test(how?)
-    
-    if (shiptype === "shipA"){
+    switch(shiptype){
+        case "shipA":
             if (this.shipA[0] === "P"){
                 this.boardstate[this.shipA[1]] = 0
                 this.boardstate[this.shipA[2]] = 0
@@ -35,10 +35,9 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
                     this.boardstate[x+4]= "A"//this.shipA[3]
                     this.shipA[3] = (x+4)
                     this.shipA[0] = "P"
-            }}
-        }
-    else if (shiptype === "shipB" ) { //switch to 'switch'
-
+            }};
+        break;
+        case "shipB":
             if (this.shipB[0] === "P"){
                 this.boardstate[this.shipB[1]] = 0
                 this.boardstate[this.shipB[2]] = 0
@@ -62,10 +61,9 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
                     this.boardstate[x+4]= "B"//this.shipB[3]
                     this.shipB[3] = (x+4)
                     this.shipB[0] = "P"
-    }  }
-        }
-    else if (shiptype === "shipC") {
-        
+            }};
+            break;
+        case "shipC": 
             if (this.shipC[0] === "P"){
                 this.boardstate[this.shipB[1]] = 0
                 this.boardstate[this.shipB[2]] = 0
@@ -84,8 +82,10 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
                     this.boardstate[x-4]= "C"//this.ShipB[1]
                     this.shipC[1] = (x-4)
                     this.shipC[0] = "P"
-            }
-        }
+            }};
+            break;
+        default:
+        console.log("This should not appear.")
 }}}
 //const board = []
 //const WWWD = player.boardstate
