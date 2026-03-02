@@ -219,24 +219,24 @@ placement(x, shiptype, rotate) {
             }
         }
     }
-const testingA = () => {
-  console.log("You clicked me!");
-};
+
 /*-------------------------------- Variables --------------------------------*/
 
 
 /*------------------------ Cached Element References ------------------------*/
 const tiles = document.querySelectorAll(".tile");
+const ammocount = document.querySelector(".display")
 /*----------------------------- Event Listeners -----------------------------*/
 tiles.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    // This log is for testing purposes to verify we're getting the correct value
-    console.log(gameState.fire(event.target.innerText));
-    // Future logic to capture the button's value would go here...
+  button.addEventListener("click", (event) => {     
+    console.log(gameState.fire(event.target.innerText));// This log is for testing purposes to verify we're getting the correct value
+    //button.removeEventListener("click", (event)) <-this does not currently work as planned
+    ammocount.textContent = player.Ammo //updates counter
   });
 });
-/*-------------------------------- Functions --------------------------------*/
 
+/*-------------------------------- Functions --------------------------------*/
+ammocount.textContent = player.Ammo //displays total ammo left at start
 
 
     
