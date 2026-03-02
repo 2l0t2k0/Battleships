@@ -95,22 +95,23 @@ player.placement(5,"shipA","Hori")
 player.placement(8,"shipC","Hori")
 
 const fire = function(x){//switch to switch
-    if (player.boardstate[x] === 0){
-        console.log("MISS")
-        player.boardstate[x] = "O"
-    }
-    else if (player.boardstate[x] === "A"){
-        console.log("Hit")
-        player.boardstate[x] = "X"
-        player.Health -=1
-    }
-    else if (player.boardstate[x] === "C"){
-        console.log("Hit")
-        player.boardstate[x] = "X"
-        player.Health -=1}
-    else if (player.boardstate[x]=== "X" || player.boardstate[x]==="O"){
-        console.log("Already shot at, select another area")
-    }
+    switch(player.boardstate[x]){
+        case 0:
+        console.log("MISS");
+        player.boardstate[x] = "O";
+        break;
+        case "A":
+        case "B":
+        case "C":
+        case "D":
+        case "E":
+        console.log("Hit");
+        player.boardstate[x] = "X";
+        player.Health -=1;
+        break;
+        default:
+        console.log("Already shot at, select another area");
+    }}
     
 }//switch to switch
 fire(2)
