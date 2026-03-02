@@ -1,0 +1,19 @@
+.tile, tile, input[type=button]
+{
+    size: 10px 10px;
+    display: inline-block;
+    padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: #2a2a2a;
+  color: #f9f9f9;
+  border-radius: 1px;
+  border: 1px solid #1d7484;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-right: -4px;
+}
+.tile:hover{
+    color: #f9f9f9;
+}

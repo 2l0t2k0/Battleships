@@ -1,3 +1,6 @@
+const tile = document.querySelector(".tile");
+//onclick(tile) should return assigned value of x for fireloop
+tile.addEventListener("click", ()=>{console.log("test")});
 const gameState = { 
 CurrentStage: 0,
 // ->start screen
@@ -86,7 +89,7 @@ fire (x){
 //// -> winner is player hp > 0
 //// -> reset button to start or player 1 placement
 
-const handler = {
+//const handler = {
 
 // setAmmo: function(){use dom for this
 //     let ammo = prompt("Ammo count?")
@@ -97,7 +100,7 @@ const handler = {
 //         player.Ammo = parseInt(ammo)
 // },
 
-}
+//}
 
 
 const player = {
@@ -326,7 +329,7 @@ player.placement(8,"shipC","Hori")
 player.placement(76,"shipD", "Vert")
 player.placement(22, "shipB", "Hori")
 
-handler.setAmmo()
+//handler.setAmmo()
 
 //const board = Array.length(10) player.boardstate.map
 console.log(player.shipA)
@@ -335,7 +338,7 @@ console.log(player.shipC)
 console.log(player.shipD)
 console.log(player.shipE)
 console.log(player.ammo)
-gameState.fireloop()
+//gameState.fireloop()
 
 // console.log(player.boardstate)
 // console.log(player.Health)
