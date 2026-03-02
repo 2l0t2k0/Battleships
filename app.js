@@ -11,14 +11,12 @@ Health: 16,
 
 placement(x, shiptype, rotate) {// requires collision logic test(how?)
     switch(shiptype){
-        case "shipA":
-            if (this.shipA[0] === "P"){
-                this.boardstate[this.shipA[1]] = 0
-                this.boardstate[this.shipA[2]] = 0
-                this.boardstate[this.shipA[3]] = 0
-            }
-            {
-                if(rotate === "Hori") {  //possible to shrink?
+        case "shipA":{
+            if(rotate === "Hori") { 
+                if (this.boardstate[x] != 0 || this.boardstate[x-1] !=0 || this.boardstate[x+1] !=0){
+                console.log("Space occupied")
+                } 
+                else {
                     this.boardstate[x] = "A"//this.ShipA[2]
                     this.shipA[2] = x
                     this.boardstate[x-1] = "A"//this.ShipA[1]
@@ -26,8 +24,12 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
                     this.boardstate[x+1] = "A"//this.ShipA[3]
                     this.shipA[3] = (x+1)
                     this.shipA[0] = "P"
-            }
-                else if (rotate === "Vert"){
+            }}
+            else if (rotate === "Vert"){
+                 if (this.boardstate[x] === String || this.boardstate[x-4] === String || this.boardstate[x+4] === String){
+                console.log("Space occupied")
+            } 
+                else {
                     this.boardstate[x] = "A"//this.ShipA[2]
                     this.shipA[2] = x
                     this.boardstate[x-4]= "A"//this.ShipA[1]
@@ -35,7 +37,7 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
                     this.boardstate[x+4]= "A"//this.shipA[3]
                     this.shipA[3] = (x+4)
                     this.shipA[0] = "P"
-            }};
+            }}};
         break;
         case "shipB":
             if (this.shipB[0] === "P"){
@@ -79,7 +81,7 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
                 else if (rotate === "Vert"){
                     this.boardstate[x] = "C"//this.ShipC[2]
                     this.shipC[2] = x
-                    this.boardstate[x-4]= "C"//this.ShipB[1]
+                    this.boardstate[x-4] = "C"//this.ShipB[1]
                     this.shipC[1] = (x-4)
                     this.shipC[0] = "P"
             }};
@@ -87,14 +89,12 @@ placement(x, shiptype, rotate) {// requires collision logic test(how?)
         default:
         console.log("This should not appear.")
 }}}
-//const board = []
-//const WWWD = player.boardstate
-//while (WWWD.length) board.push(WWWD.splice(0,4))
 
 player.placement(5,"shipA","Hori")
+player.placement(6,"shipA","Hori")
 player.placement(8,"shipC","Hori")
 
-const fire = function(x){//switch to switch
+const fire = function(x){
     switch(player.boardstate[x]){
         case 0:
         console.log("MISS");
@@ -113,7 +113,7 @@ const fire = function(x){//switch to switch
         console.log("Already shot at, select another area");
     }}
     
-}//switch to switch
+//switch to switch
 fire(2)
 fire(2)
 fire(5)
