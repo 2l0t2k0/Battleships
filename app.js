@@ -1,7 +1,29 @@
+/* const gameState = { 
+Current Stage:
+->start screen
+->player 1 placement(need check that all ships placed)
+->player 2 placement
+->(loop start) player 1 shot
+-> player 2 shot
+-> (loop end) either player hp = 0
+-> winner is player hp > 0
+-> reset button to start or player 1 placement
+}
 
+*/
 
 const player = {
-boardstate: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+boardstate:[0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0],
 shipA: [],//3x1
 shipB: [],//3x1(2nd)
 shipC: [],//2x1
@@ -12,87 +34,210 @@ Health: 16,
 placement(x, shiptype, rotate) {// requires collision logic test(how?)
     switch(shiptype){
         case "shipA":{
-            if(rotate === "Hori") { 
-                if (this.boardstate[x] != 0 || this.boardstate[x-1] !=0 || this.boardstate[x+1] !=0){
-                console.log("Space occupied")
-                } 
-                else {
-                    this.boardstate[x] = "A"//this.ShipA[2]
-                    this.shipA[2] = x
-                    this.boardstate[x-1] = "A"//this.ShipA[1]
-                    this.shipA[1] = (x-1)
-                    this.boardstate[x+1] = "A"//this.ShipA[3]
-                    this.shipA[3] = (x+1)
-                    this.shipA[0] = "P"
-            }}
-            else if (rotate === "Vert"){
-                 if (this.boardstate[x] === String || this.boardstate[x-4] === String || this.boardstate[x+4] === String){
-                console.log("Space occupied")
-            } 
-                else {
-                    this.boardstate[x] = "A"//this.ShipA[2]
-                    this.shipA[2] = x
-                    this.boardstate[x-4]= "A"//this.ShipA[1]
-                    this.shipA[1] = (x-4)
-                    this.boardstate[x+4]= "A"//this.shipA[3]
-                    this.shipA[3] = (x+4)
-                    this.shipA[0] = "P"
-            }}};
-        break;
-        case "shipB":
+            if (this.shipA[0] === "P"){
+                    this.boardstate[this.shipA[0]] = 0
+                    this.boardstate[this.shipA[1]] = 0
+                    this.boardstate[this.shipA[2]] = 0
+                    this.boardstate[this.shipA[3]] = 0
+                }
+            {
+                if(rotate === "Hori") { 
+                    if (this.boardstate[x] != 0 || this.boardstate[x-1] !=0 || this.boardstate[x+1] !=0){
+                    console.log("Space occupiedA1")
+                    } 
+                    else {
+                        this.boardstate[x] = "A"//this.ShipA[2]
+                        this.shipA[2] = x
+                        this.boardstate[x-1] = "A"//this.ShipA[1]
+                        this.shipA[1] = (x-1)
+                        this.boardstate[x+1] = "A"//this.ShipA[3]
+                        this.shipA[3] = (x+1)
+                        this.shipA[0] = "P"
+                    }}
+                else if (rotate === "Vert") {                
+                    if (this.boardstate[x] != 0 || this.boardstate[x-10] !=0 || this.boardstate[x+10] !=0){
+                    console.log("Space occupiedA2")
+                    } 
+                    else {
+                        this.boardstate[x] = "A"//this.ShipA[2]
+                        this.shipA[2] = x
+                        this.boardstate[x-10]= "A"//this.ShipA[1]
+                        this.shipA[1] = (x-10)
+                        this.boardstate[x+10]= "A"//this.shipA[3]
+                        this.shipA[3] = (x+10)
+                        this.shipA[0] = "P"
+                    }
+                }
+            };
+            break;
+        }
+        case "shipB":{
             if (this.shipB[0] === "P"){
-                this.boardstate[this.shipB[1]] = 0
-                this.boardstate[this.shipB[2]] = 0
-                this.boardstate[this.shipB[3]] = 0
-            }
+                    this.boardstate[this.shipB[0]] = 0
+                    this.boardstate[this.shipB[1]] = 0
+                    this.boardstate[this.shipB[2]] = 0
+                    this.boardstate[this.shipB[3]] = 0
+                }
             {
-                if(rotate === "Hori") {
-                    this.boardstate[x] = "B"//this.ShipB[2]
-                    this.shipB[2] = x
-                    this.boardstate[x-1] = "B"//this.ShipB[1]
-                    this.shipB[1] = (x-1)
-                    this.boardstate[x+1] = "B"//this.ShipB[3]
-                    this.shipB[3] = (x+1)
-                    this.shipB[0] = "P"
+                if(rotate === "Hori") { 
+                    if (this.boardstate[x] != 0 || this.boardstate[x-1] !=0 || this.boardstate[x+1] !=0){
+                    console.log("Space occupiedB1")
+                    } 
+                    else {
+                        this.boardstate[x] = "B"//this.ShipB[2]
+                        this.shipB[2] = x
+                        this.boardstate[x-1] = "B"//this.ShipB[1]
+                        this.shipB[1] = (x-1)
+                        this.boardstate[x+1] = "B"//this.ShipB[3]
+                        this.shipB[3] = (x+1)
+                        this.shipB[0] = "P"
+                    }
+                }
+                else if (rotate === "Vert"){                
+                    }
+                    if (this.boardstate[x] != 0 || this.boardstate[x-10] !=0 || this.boardstate[x+10] !=0){
+                    console.log("Space occupiedB2")
+                    } 
+                    else {
+                        this.boardstate[x] = "B"//this.ShipB[2]
+                        this.shipB[2] = x
+                        this.boardstate[x-10]= "B"//this.ShipB[1]
+                        this.shipB[1] = (x-10)
+                        this.boardstate[x+10]= "B"//this.shipB[3]
+                        this.shipB[3] = (x+10)
+                        this.shipB[0] = "P"
+                }
             }
-                else if (rotate === "Vert"){
-                    this.boardstate[x] = "B"//this.ShipB[2]
-                    this.shipB[2] = x
-                    this.boardstate[x-4]= "B"//this.ShipB[1]
-                    this.shipB[1] = (x-4)
-                    this.boardstate[x+4]= "B"//this.shipB[3]
-                    this.shipB[3] = (x+4)
-                    this.shipB[0] = "P"
-            }};
-            break;
-        case "shipC": 
+        };
+        break;
+        case "shipC":{
             if (this.shipC[0] === "P"){
-                this.boardstate[this.shipB[1]] = 0
-                this.boardstate[this.shipB[2]] = 0
-            }
+                    this.boardstate[this.shipC[0]] = 0
+                    this.boardstate[this.shipC[1]] = 0
+                    this.boardstate[this.shipC[2]] = 0
+                }
             {
-                if(rotate === "Hori") {
-                    this.boardstate[x] = "C"//this.ShipC[2]
-                    this.shipC[2] = x
-                    this.boardstate[x-1] = "C"//this.ShipC[1]
-                    this.shipC[1] = (x-1)
-                    this.shipC[0] = "P"
-            }
-                else if (rotate === "Vert"){
-                    this.boardstate[x] = "C"//this.ShipC[2]
-                    this.shipC[2] = x
-                    this.boardstate[x-4] = "C"//this.ShipB[1]
-                    this.shipC[1] = (x-4)
-                    this.shipC[0] = "P"
-            }};
-            break;
+                if(rotate === "Hori") { 
+                    if (this.boardstate[x] != 0 ||  this.boardstate[x+1] !=0){
+                    console.log("Space occupiedC1")
+                    } 
+                    else {
+                        this.boardstate[x] = "C"//this.ShipC[2]
+                        this.shipC[2] = x
+                        this.boardstate[x+1] = "C"//this.ShipC[1]
+                        this.shipC[1] = (x+1)
+                        this.shipC[0] = "P"
+                    }}
+                else if (rotate === "Vert"){                
+                    }
+                    if (this.boardstate[x] != 0 || this.boardstate[x+10] !=0){
+                    console.log("Space occupiedC2")
+                    } 
+                    else {
+                        this.boardstate[x] = "C"//this.ShipC[2]
+                        this.shipC[2] = x
+                        this.boardstate[x+10]= "C"//this.ShipC[1]
+                        this.shipC[1] = (x+10)
+                        this.shipC[0] = "P"
+                }}};
+        break;
+        case "shipD":{
+            if (this.shipD[0] === "P"){
+                    this.boardstate[this.shipD[0]] = 0
+                    this.boardstate[this.shipD[1]] = 0
+                    this.boardstate[this.shipD[2]] = 0
+                    this.boardstate[this.shipD[3]] = 0
+                    this.boardstate[this.shipD[4]] = 0
+                }
+            {
+                if(rotate === "Hori") { 
+                    if (this.boardstate[x] != 0 || this.boardstate[x-1] !=0 || this.boardstate[x+1] !=0 || this.boardstate[x+2] !=0){
+                    console.log("Space occupiedD1")
+                    } 
+                    else {
+                        this.boardstate[x] = "D"//this.ShipD[2]
+                        this.shipD[2] = x
+                        this.boardstate[x-1] = "D"//this.ShipD[1]
+                        this.shipD[1] = (x-1)
+                        this.boardstate[x+1] = "D"//this.ShipD[3]
+                        this.shipD[3] = (x+1)
+                        this.boardstate[x+2] = "D"//this.shipD[4]
+                        this.shipD[4] = (x+2)
+                        this.shipD[0] = "P"
+                    }}
+                else if (rotate === "Vert"){                
+                    }
+                    if (this.boardstate[x] != 0 || this.boardstate[x-10] !=0 || this.boardstate[x+10] !=0 || this.boardstate[x+20] !=0){
+                    console.log("Space occupiedD2")
+                    } 
+                    else {
+                        this.boardstate[x] = "D"//this.ShipD[2]
+                        this.shipD[2] = x
+                        this.boardstate[x-10] = "D"//this.ShipD[1]
+                        this.shipD[1] = (x-10)
+                        this.boardstate[x+10] = "D"//this.ShipD[3]
+                        this.shipD[3] = (x+10)
+                        this.boardstate[x+20] = "D"//this.shipD[4]
+                        this.shipD[4] = (x+20)
+                        this.shipD[0] = "P"
+                }}};
+        break;
+        case "shipE":{
+            if (this.shipE[0] === "P"){
+                    this.boardstate[this.shipE[0]] = 0
+                    this.boardstate[this.shipE[1]] = 0
+                    this.boardstate[this.shipE[2]] = 0
+                    this.boardstate[this.shipE[3]] = 0
+                    this.boardstate[this.shipE[4]] = 0
+                    this.boardstate[this.shipE[5]] = 0
+                }
+            {
+                if(rotate === "Hori") { 
+                    if (this.boardstate[x] != 0 || this.boardstate[x-1] !=0 || this.boardstate[x-2] !=0 || this.boardstate[x+1] !=0 || this.boardstate[x+2] !=0){
+                    console.log("Space occupiedE1")
+                    } 
+                    else {//to shorten to singular function
+                        this.boardstate[x] = "E"//this.ShipE[2]
+                        this.shipE[2] = x
+                        this.boardstate[x-1] = "E"//this.ShipE[1]
+                        this.shipE[1] = (x-1)
+                        this.boardstate[x-2] = "D"//this.ShipE[5]
+                        this.shipE[5] = (x-2)
+                        this.boardstate[x+1] = "D"//this.ShipE[3]
+                        this.shipE[3] = (x+1)
+                        this.boardstate[x+2] = "D"//this.shipE[4]
+                        this.shipE[4] = (x+2)
+                        this.shipE[0] = "P"
+                    }}
+                else if (rotate === "Vert"){                
+                    }
+                    if (this.boardstate[x] != 0 || this.boardstate[x-10] !=0 || this.boardstate[x-20] !=0|| this.boardstate[x+10] !=0 || this.boardstate[x+20] !=0){
+                    console.log("Space occupiedE2")
+                    } 
+                    else {
+                        const setvalEV =(y)=>{
+                            this.boardstate[y] = "E"
+                            this.shipE[y] = (y)
+                        } 
+                        setvalEV(x)
+                        setvalEV(x-10)
+                        setvalEV(x-20)
+                        setvalEV(x+10)
+                        setvalEV(x+20)
+                        this.shipE[0] = "P"
+                }}};
+        break;
+        
         default:
         console.log("This should not appear.")
-}}}
+    }}}
 
 player.placement(5,"shipA","Hori")
-player.placement(6,"shipA","Hori")
+player.placement(48,"shipE","Vert")
 player.placement(8,"shipC","Hori")
+player.placement(76,"shipD", "Vert")
+player.placement(22, "shipB", "Hori")
+
 
 const fire = function(x){
     switch(player.boardstate[x]){
@@ -112,8 +257,8 @@ const fire = function(x){
         default:
         console.log("Already shot at, select another area");
     }}
-    
-//switch to switch
+//const board = Array.length(10) player.boardstate.map
+
 fire(2)
 fire(2)
 fire(5)
@@ -125,46 +270,3 @@ fire(8)
 console.log(player.boardstate)
 console.log(player.Health)
 console.log(player.shipA)
-//console.log(board)
-/*const board2 = [0,0,0,0,0,0,0]
-
-
-
-const whack = function(x){
-    if (board2[x] === 1){
-        console.log("a")
-    }
-    else {
-        console.log("b")
-    }
-}
-whack(3)
-
-
-
-/*function test(arr) {
-    for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-      console.log("Element at [" + i + "][" + j + "] is: " + arr[i][j])}}
-}
-test(board)*/
-
-/*function testy(arr,x,y){
-    if (arr[x][y] === 3){
-    console.log("hit")
-    arr[x][y] = "X"
-    }
-    else {
-        console.log("miss")
-        arr[x][y] = "M" 
-        }
-    }
-const fire = function(x,y){ 
-    testy(board)
-    }
-
-fire(1,3)
-fire(2,2)
-fire(3,3)
-fire(1,2)*/
-//console.log(board)
