@@ -233,6 +233,8 @@ const pregame = document.getElementById("pregame")
 const gameboard = document.getElementById("gameboard")
 const board = document.getElementById("board")
 const display2 = document.querySelector(".display2")
+const loss = document.getElementById("Loss")
+const win = document.getElementById("Win")
 /*----------------------------- Event Listeners -----------------------------*/
 ammoinput.addEventListener("click", () =>{
 player.Ammo = document.querySelector("#ammoinputbox").value
@@ -252,15 +254,31 @@ tiles.forEach((button) => {
     console.log(event.target.innerText);// This log is for testing purposes to verify we're getting the correct value        
     fire(event.target.innerText);
     ammocount.textContent = "Remaining Ammo: " + player.Ammo //updates Ammocounter
+    console.log("p"+player.Health)
     if (player.boardstate[event.target.innerText] ==="X"){
         button.style.backgroundColor = "red"
     }
     else if (player.boardstate[event.target.innerText] === "O"){
         button.style.backgroundColor = "#1eb0ca"
     }
-    })
-});
+    gamestate()
+    }
+    )
+}); 
+const gamestate = ()=>{
+    if (player.Ammo === 0){
+        gameboard.classList.add("hidden")
+        loss.classList.remove("hidden")
+        console.log("A")
+    }
+    else if (player.Health === 0){
+        gameboard.classList.add("hidden")
+        win.classList.remove("hidden")
+        console.log("B")
+        console.log(player.Health)
+    } 
 
+}
 
 
 
