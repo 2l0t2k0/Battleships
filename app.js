@@ -235,6 +235,7 @@ const board = document.getElementById("board")
 const display2 = document.querySelector(".display2")
 const loss = document.getElementById("Loss")
 const win = document.getElementById("Win")
+const restart = document.getElementById("Restart")
 /*----------------------------- Event Listeners -----------------------------*/
 ammoinput.addEventListener("click", () =>{
 player.Ammo = document.querySelector("#ammoinputbox").value
@@ -247,6 +248,35 @@ startgame.addEventListener("click", () =>{
     gameboard.classList.remove("hidden")
     ammocount.textContent = "Remaining Ammo: " + player.Ammo  //displays total ammo left at start
 } )
+
+restart.addEventListener("click", ()=>{
+    player.boardstate=[0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0],
+    player.shipA= [],//3x1
+    player.shipB= [],//3x1(2nd)
+    player.shipC= [],//2x1
+    player.shipD= [],//4x1
+    player.shipE= [],//5x1
+    player.Ammo = 20
+    player.Health = 17
+    pregame.classList.remove("hidden")
+    loss.classList.add("hidden")
+    win.classList.add("hidden")
+    player.placement(5,"shipA","Hori")
+player.placement(48,"shipE","Vert")
+player.placement(8,"shipC","Hori")
+player.placement(76,"shipD", "Vert")
+player.placement(22, "shipB", "Hori")
+})
 
 
 tiles.forEach((button) => {
@@ -269,11 +299,13 @@ const gamestate = ()=>{
     if (player.Ammo === 0){
         gameboard.classList.add("hidden")
         loss.classList.remove("hidden")
+        restart.classList.remove("hidden")
         console.log("A")
     }
     else if (player.Health === 0){
         gameboard.classList.add("hidden")
         win.classList.remove("hidden")
+        restart.classList.remove("hidden")
         console.log("B")
         console.log(player.Health)
     } 
@@ -353,7 +385,7 @@ const fire = function(x){
         player.Ammo-=1
         break;
         default:
-        console.log("Already shot at, select another area");
+        display2.textContent = "Already shot at, please select another tile";
         }
     }
 
