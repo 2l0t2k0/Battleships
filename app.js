@@ -226,39 +226,42 @@ placement(x, shiptype, rotate) {
 /*------------------------ Cached Element References ------------------------*/
 const tiles = document.querySelectorAll(".tile");
 const ammocount = document.querySelector(".display")
+const tileID = document.getElementById("board")
 /*----------------------------- Event Listeners -----------------------------*/
 tiles.forEach((button) => {
-  button.addEventListener("click", (event) => {     
-    console.log(gameState.fire(event.target.innerText));// This log is for testing purposes to verify we're getting the correct value
+  button.addEventListener("click", (event) => {
+    console.log(event.target.innerText);// This log is for testing purposes to verify we're getting the correct value        
+    fire(event.target.innerText);
     //button.removeEventListener("click", (event)) <-this does not currently work as planned
-    ammocount.textContent = player.Ammo //updates counter
+    ammocount.textContent = player.Ammo //updates Ammocounter
+    if (player.boardstate[event.target.innerText] ==="X"){
+        button.style.backgroundColor = "red"
+    }
+    else if (player.boardstate[event.target.innerText] === "O"){
+        button.style.backgroundColor = "#1eb0ca"
+    }
+    currentstatus()
+    })
   });
-});
+
 
 /*-------------------------------- Functions --------------------------------*/
 ammocount.textContent = player.Ammo //displays total ammo left at start
 
+const currentstatus = function(){
+    if (player.Health === 0){
+        
+        console.log("you win")
+    }
+    else if (player.Ammo === 0){
+        
+        console.log("you lose")
+    }
+}
+currentstatus()
 
-    
-// });
 
-
-
-
-
-
-
-const gameState = { 
-CurrentStage: 0,
-// ->start screen
-//// ->player 1 placement(need check that all ships placed)
-placing: function(){
-},
-//// ->player 2 placement
-
-//current lose state(run out of ammo)
-// ->(loop start) player 1 shot
-fire (x){
+const fire = function(x){
     switch(player.boardstate[x]){
         case 0:
         console.log("MISS");
@@ -318,38 +321,7 @@ fire (x){
         default:
         console.log("Already shot at, select another area");
         }
-    },
-    fireloop: function(){
-        while (player.Health > 0 && player.Ammo > 0) {  
-        let reqinput = prompt ("Fire At?")
-        gameState.fire(reqinput)
-        }
-        if (player.Health === 0){
-            console.log("you win")}
-        else if (player.Ammo === 0){
-            console.log("you lose")
-        }
-    },//no longer need this
-}
-//// -> player 2 shot
-//// -> (loop end) either player hp = 0
-//// -> winner is player hp > 0
-//// -> reset button to start or player 1 placement
-
-//const handler = {
-
-// setAmmo: function(){use dom for this
-//     let ammo = prompt("Ammo count?")
-//     if (parseInt(ammo) != Number){
-//         console.log("not a number")
-//     }
-//     else 
-//         player.Ammo = parseInt(ammo)
-// },
-
-//}
-
-
+    }
 
 player.placement(5,"shipA","Hori")
 player.placement(48,"shipE","Vert")
@@ -357,17 +329,5 @@ player.placement(8,"shipC","Hori")
 player.placement(76,"shipD", "Vert")
 player.placement(22, "shipB", "Hori")
 
-//handler.setAmmo()
 
-//const board = Array.length(10) player.boardstate.map
-console.log(player.shipA)
-console.log(player.shipB)
-console.log(player.shipC)
-console.log(player.shipD)
-console.log(player.shipE)
-console.log(player.ammo)
-//gameState.fireloop()
-
-// console.log(player.boardstate)
-// console.log(player.Health)
 

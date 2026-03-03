@@ -14,20 +14,17 @@
 
 .tile, tile, input[type=button]
 {
-    
-    display: inline-block;
-    padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
+  display: inline-block;
+  padding: 15px 15px;
   white-space: nowrap;
-  background-color: #605a5a;
+  background-color: lightgrey;
   color: #f9f9f9;
   border-radius: 1px;
   border: 3px solid #7b6b6b;
   cursor: pointer;
   box-sizing: border-box;
-  margin-bottom: -20px;
-  margin-top: -20px;
+  margin-bottom: 0px;
+  margin-top: 0px;
   margin-right: -5px; 
   font-size: 0px;
 }
