@@ -226,14 +226,32 @@ placement(x, shiptype, rotate) {
 /*------------------------ Cached Element References ------------------------*/
 const tiles = document.querySelectorAll(".tile");
 const ammocount = document.querySelector(".display")
-const tileID = document.getElementById("board")
+const fullboard = document.getElementById("fullboard")
+const ammoinput = document.getElementById("ammoinput")
+const startgame = document.getElementById("startgame")
+const pregame = document.getElementById("pregame")
+const gameboard = document.getElementById("gameboard")
 /*----------------------------- Event Listeners -----------------------------*/
+ammoinput.addEventListener("click", () =>{
+player.Ammo = document.querySelector("#ammoinputbox").value
+if (player.Ammo != Number){
+    player.Ammo = 20
+}
+console.log(player.Ammo)
+displayplayerammo()
+} )
+
+startgame.addEventListener("click", () =>{    
+    pregame.classList.add("hidden")    
+    gameboard.classList.remove("hidden")
+    ammocount.textContent = "Remaining Ammo: " + player.Ammo  //displays total ammo left at start
+} )
+
 tiles.forEach((button) => {
   button.addEventListener("click", (event) => {
     console.log(event.target.innerText);// This log is for testing purposes to verify we're getting the correct value        
     fire(event.target.innerText);
-    //button.removeEventListener("click", (event)) <-this does not currently work as planned
-    ammocount.textContent = player.Ammo //updates Ammocounter
+    ammocount.textContent = "Remaining Ammo: " + player.Ammo //updates Ammocounter
     if (player.boardstate[event.target.innerText] ==="X"){
         button.style.backgroundColor = "red"
     }
@@ -246,19 +264,24 @@ tiles.forEach((button) => {
 
 
 /*-------------------------------- Functions --------------------------------*/
-ammocount.textContent = player.Ammo //displays total ammo left at start
+const displayplayerammo = function(){
+    document.querySelector(".input").textContent = ("Starting Ammo: " + player.Ammo)
+}
+displayplayerammo()
+
+
 
 const currentstatus = function(){
     if (player.Health === 0){
-        
+        fullboard.classList.add("hidden")
         console.log("you win")
     }
     else if (player.Ammo === 0){
-        
+        fullboard.classList.add("hidden")
         console.log("you lose")
     }
 }
-currentstatus()
+
 
 
 const fire = function(x){

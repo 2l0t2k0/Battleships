@@ -9,10 +9,28 @@
     <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-    <h1>Ammo Count: </h1>
-    <div class="row">
-        <div class="display"></div>
-    <div class="board">
+  <h1 class="title">Battleships</h1>
+    <h2>
+      <div id="pregame">
+      <div class="input">Starting Ammo:</div>
+        <h6>You may set your ammocount here [1-80]</h6>
+        <input 
+          type="number"
+          id="ammoinputbox"
+          min="1"
+          max="80"
+          value="20"
+          /> 
+        <button id="ammoinput">Submit</button>
+        <div class="row">
+      <button id="startgame">Click here to start the game</button>
+      </div>
+    </div>
+    </h2>
+
+    <div id="gameboard" class="hidden">
+    <h3 class="display">Ammo Count</h3>
+    <div class="board" id="fullboard">
         <div class="row" id="board">
             <div class="tile number">0</div>
             <div class="tile number">1</div>
@@ -133,6 +151,6 @@
             <div class="tile number">98</div>
             <div class="tile number">99</div>
         </div>
-    </div>
+    </div></div>
 </body>
 </html>
