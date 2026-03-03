@@ -217,9 +217,29 @@ placement(x, shiptype, rotate) {
         default:
         console.log("Error! This should not appear.")
             }
-        }
-    }
+        },
+reset(){
+player.boardstate = [0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0]
+    player.shipA = []//3x1
+    player.shipB = []//3x1(2nd)
+    player.shipC = []//2x1
+    player.shipD= []//4x1
+    player.shipE= []//5x1
+    player.Ammo = 20
+    player.Health = 17
+}}
 
+    
 /*-------------------------------- Variables --------------------------------*/
 
 
@@ -250,24 +270,8 @@ startgame.addEventListener("click", () =>{
 } )
 
 restart.addEventListener("click", ()=>{
-    player.boardstate=[0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0],
-    player.shipA= [],//3x1
-    player.shipB= [],//3x1(2nd)
-    player.shipC= [],//2x1
-    player.shipD= [],//4x1
-    player.shipE= [],//5x1
-    player.Ammo = 20
-    player.Health = 17
+    player.reset()
+    restart.classList.add("hidden")
     pregame.classList.remove("hidden")
     loss.classList.add("hidden")
     win.classList.add("hidden")
@@ -276,6 +280,7 @@ player.placement(48,"shipE","Vert")
 player.placement(8,"shipC","Hori")
 player.placement(76,"shipD", "Vert")
 player.placement(22, "shipB", "Hori")
+displayplayerammo()
 })
 
 
@@ -292,6 +297,8 @@ tiles.forEach((button) => {
         button.style.backgroundColor = "#1eb0ca"
     }
     gamestate()
+    if (gamestate() === "true"){
+        tiles.forEach((button) =>{button.style.backgroundColor = "lightgrey"})}
     }
     )
 }); 
@@ -300,14 +307,13 @@ const gamestate = ()=>{
         gameboard.classList.add("hidden")
         loss.classList.remove("hidden")
         restart.classList.remove("hidden")
-        console.log("A")
+        return "true"
     }
     else if (player.Health === 0){
         gameboard.classList.add("hidden")
         win.classList.remove("hidden")
         restart.classList.remove("hidden")
-        console.log("B")
-        console.log(player.Health)
+        return "true"
     } 
 
 }
@@ -320,8 +326,6 @@ const displayplayerammo = function(){
     document.querySelector(".input").textContent = ("Starting Ammo: " + player.Ammo)
 }
 displayplayerammo()
-
-
 
 
 
