@@ -231,12 +231,11 @@ const ammoinput = document.getElementById("ammoinput")
 const startgame = document.getElementById("startgame")
 const pregame = document.getElementById("pregame")
 const gameboard = document.getElementById("gameboard")
+const board = document.getElementById("board")
+const display2 = document.querySelector(".display2")
 /*----------------------------- Event Listeners -----------------------------*/
 ammoinput.addEventListener("click", () =>{
 player.Ammo = document.querySelector("#ammoinputbox").value
-if (player.Ammo != Number){
-    player.Ammo = 20
-}
 console.log(player.Ammo)
 displayplayerammo()
 } )
@@ -246,6 +245,7 @@ startgame.addEventListener("click", () =>{
     gameboard.classList.remove("hidden")
     ammocount.textContent = "Remaining Ammo: " + player.Ammo  //displays total ammo left at start
 } )
+
 
 tiles.forEach((button) => {
   button.addEventListener("click", (event) => {
@@ -258,9 +258,11 @@ tiles.forEach((button) => {
     else if (player.boardstate[event.target.innerText] === "O"){
         button.style.backgroundColor = "#1eb0ca"
     }
-    currentstatus()
     })
-  });
+});
+
+
+
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -271,73 +273,64 @@ displayplayerammo()
 
 
 
-const currentstatus = function(){
-    if (player.Health === 0){
-        fullboard.classList.add("hidden")
-        console.log("you win")
-    }
-    else if (player.Ammo === 0){
-        fullboard.classList.add("hidden")
-        console.log("you lose")
-    }
-}
+
 
 
 
 const fire = function(x){
     switch(player.boardstate[x]){
         case 0:
-        console.log("MISS");
+        display2.textContent = "Miss";
         player.boardstate[x] = "O"
         player.Ammo -= 1;
         break;
         case "A":
-            console.log("Hit");
+            display2.textContent = "Hit";
             player.boardstate[x] = "X";
             player.shipA[4] -=1;
             player.Health -=1;
         if (player.shipA[4] <= 0){
-            console.log("ShipA Sunk")
+            display2.textContent = "Ship Sunk"
         }
         player.Ammo-=1;
             break;
         case "B":
-            console.log("Hit");
+            display2.textContent = "Hit";
             player.boardstate[x] = "X"
             player.shipB[4] -=1;
             player.Health -=1;
         if (player.shipB[4] <= 0){
-            console.log("ShipB Sunk")
+            display2.textContent = "Ship Sunk"
         }
         player.Ammo-=1;
             break;
         case "C":
-            console.log("Hit");
+            display2.textContent = "Hit";
             player.boardstate[x] = "X"
             player.shipC[3] -=1;
             player.Health -=1;
         if (player.shipC[3] <= 0){
-            console.log("ShipC Sunk")
+            display2.textContent = "Destroyer Sunk"
         }
         player.Ammo-=1;
             break;
         case "D":
-            console.log("Hit");
+            display2.textContent = "Hit";;
             player.boardstate[x] = "X"
             player.shipD[5] -=1;
             player.Health -=1;
         if (player.shipD[5] <= 0){
-            console.log("ShipD Sunk")
+            display2.textContent = "Ship Sunk";
         }
         player.Ammo-=1;
             break;
         case "E":
-        console.log("Hit");
+        display2.textContent = "Hit";;
         player.boardstate[x] = "X";
         player.shipE[6] -=1;
         player.Health -=1;
         if (player.shipE[6] <= 0){
-            console.log("Carrier Sunk")
+            display2.textContent = "Carrier Sunk";
         }
         player.Ammo-=1
         break;
