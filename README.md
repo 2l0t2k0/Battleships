@@ -18,6 +18,8 @@ Output Hit or Miss (Game should be able to respond if shot is a hit or miss)
 Repeat previous 2 steps (Game should not terminate suddenly, instead looping the previous 2 steps until the following)
 Output Win or Lose (Game should terminate and tell the player if they have won or lost)
 
+Current Implementation is 'playable' at https://2l0t2k0.github.io/Battleships/ 
+
 
 Attributions: CSS: Sakura (https://oxal.org/projects/sakura/)
 
