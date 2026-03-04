@@ -1,105 +1,4 @@
-const gameState = { 
-CurrentStage: 0,
-// ->start screen
-//// ->player 1 placement(need check that all ships placed)
-placing: function(){
-},
-//// ->player 2 placement
-
-//current lose state(run out of ammo)
-// ->(loop start) player 1 shot
-fire (x){
-    switch(player.boardstate[x]){
-        case 0:
-        console.log("MISS");
-        player.boardstate[x] = "O"
-        player.Ammo -= 1;
-        break;
-        case "A":
-            console.log("Hit");
-            player.boardstate[x] = "X";
-            player.shipA[4] -=1;
-            player.Health -=1;
-        if (player.shipA[4] <= 0){
-            console.log("ShipA Sunk")
-        }
-        player.Ammo-=1;
-            break;
-        case "B":
-            console.log("Hit");
-            player.boardstate[x] = "X"
-            player.shipB[4] -=1;
-            player.Health -=1;
-        if (player.shipB[4] <= 0){
-            console.log("ShipB Sunk")
-        }
-        player.Ammo-=1;
-            break;
-        case "C":
-            console.log("Hit");
-            player.boardstate[x] = "X"
-            player.shipC[3] -=1;
-            player.Health -=1;
-        if (player.shipC[3] <= 0){
-            console.log("ShipC Sunk")
-        }
-        player.Ammo-=1;
-            break;
-        case "D":
-            console.log("Hit");
-            player.boardstate[x] = "X"
-            player.shipD[5] -=1;
-            player.Health -=1;
-        if (player.shipD[5] <= 0){
-            console.log("ShipD Sunk")
-        }
-        player.Ammo-=1;
-            break;
-        case "E":
-        console.log("Hit");
-        player.boardstate[x] = "X";
-        player.shipE[6] -=1;
-        player.Health -=1;
-        if (player.shipE[6] <= 0){
-            console.log("Carrier Sunk")
-        }
-        player.Ammo-=1
-        break;
-        default:
-        console.log("Already shot at, select another area");
-        }
-    },
-    fireloop: function(){
-        while (player.Health > 0 && player.Ammo > 0) {  
-        let reqinput = prompt ("Fire At?")
-        gameState.fire(reqinput)
-        }
-        if (player.Health === 0){
-            console.log("you win")}
-        else if (player.Ammo === 0){
-            console.log("you lose")
-        }
-    },
-}
-//// -> player 2 shot
-//// -> (loop end) either player hp = 0
-//// -> winner is player hp > 0
-//// -> reset button to start or player 1 placement
-
-const handler = {
-
-// setAmmo: function(){use dom for this
-//     let ammo = prompt("Ammo count?")
-//     if (parseInt(ammo) != Number){
-//         console.log("not a number")
-//     }
-//     else 
-//         player.Ammo = parseInt(ammo)
-// },
-
-}
-
-
+/*-------------------------------- Constants --------------------------------*/
 const player = {
 boardstate:[0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
@@ -318,25 +217,187 @@ placement(x, shiptype, rotate) {
         default:
         console.log("Error! This should not appear.")
             }
+        },
+reset(){
+player.boardstate = [0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0]
+    player.shipA = []//3x1
+    player.shipB = []//3x1(2nd)
+    player.shipC = []//2x1
+    player.shipD= []//4x1
+    player.shipE= []//5x1
+    player.Ammo = 20
+    player.Health = 17
+}}
+
+    
+/*-------------------------------- Variables --------------------------------*/
+
+
+/*------------------------ Cached Element References ------------------------*/
+const tiles = document.querySelectorAll(".tile");
+const ammocount = document.querySelector(".display")
+const fullboard = document.getElementById("fullboard")
+const ammoinput = document.getElementById("ammoinput")
+const startgame = document.getElementById("startgame")
+const pregame = document.getElementById("pregame")
+const gameboard = document.getElementById("gameboard")
+const board = document.getElementById("board")
+const display2 = document.querySelector(".display2")
+const loss = document.getElementById("Loss")
+const win = document.getElementById("Win")
+const restart = document.getElementById("Restart")
+/*----------------------------- Event Listeners -----------------------------*/
+ammoinput.addEventListener("click", () =>{
+player.Ammo = document.querySelector("#ammoinputbox").value
+console.log(player.Ammo)
+displayplayerammo()
+} )
+
+startgame.addEventListener("click", () =>{    
+    pregame.classList.add("hidden")    
+    gameboard.classList.remove("hidden")
+    ammocount.textContent = "Remaining Ammo: " + player.Ammo  //displays total ammo left at start
+} )
+
+restart.addEventListener("click", ()=>{
+    player.reset()
+    restart.classList.add("hidden")
+    pregame.classList.remove("hidden")
+    loss.classList.add("hidden")
+    win.classList.add("hidden")
+    player.placement(5,"shipA","Hori")
+player.placement(48,"shipE","Vert")
+player.placement(8,"shipC","Hori")
+player.placement(76,"shipD", "Vert")
+player.placement(22, "shipB", "Hori")
+displayplayerammo()
+})
+
+
+tiles.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    console.log(event.target.innerText);// This log is for testing purposes to verify we're getting the correct value        
+    fire(event.target.innerText);
+    ammocount.textContent = "Remaining Ammo: " + player.Ammo //updates Ammocounter
+    console.log("p"+player.Health)
+    if (player.boardstate[event.target.innerText] ==="X"){
+        button.style.backgroundColor = "red"
+    }
+    else if (player.boardstate[event.target.innerText] === "O"){
+        button.style.backgroundColor = "#1eb0ca"
+    }
+    gamestate()
+    if (gamestate() === "true"){
+        tiles.forEach((button) =>{button.style.backgroundColor = "lightgrey"})}
+    }
+    )
+}); 
+const gamestate = ()=>{
+    if (player.Ammo === 0){
+        gameboard.classList.add("hidden")
+        loss.classList.remove("hidden")
+        restart.classList.remove("hidden")
+        return "true"
+    }
+    else if (player.Health === 0){
+        gameboard.classList.add("hidden")
+        win.classList.remove("hidden")
+        restart.classList.remove("hidden")
+        return "true"
+    } 
+
+}
+
+
+
+
+/*-------------------------------- Functions --------------------------------*/
+const displayplayerammo = function(){
+    document.querySelector(".input").textContent = ("Starting Ammo: " + player.Ammo)
+}
+displayplayerammo()
+
+
+
+
+
+const fire = function(x){
+    switch(player.boardstate[x]){
+        case 0:
+        display2.textContent = "Miss";
+        player.boardstate[x] = "O"
+        player.Ammo -= 1;
+        break;
+        case "A":
+            display2.textContent = "Hit";
+            player.boardstate[x] = "X";
+            player.shipA[4] -=1;
+            player.Health -=1;
+        if (player.shipA[4] <= 0){
+            display2.textContent = "Ship Sunk"
+        }
+        player.Ammo-=1;
+            break;
+        case "B":
+            display2.textContent = "Hit";
+            player.boardstate[x] = "X"
+            player.shipB[4] -=1;
+            player.Health -=1;
+        if (player.shipB[4] <= 0){
+            display2.textContent = "Ship Sunk"
+        }
+        player.Ammo-=1;
+            break;
+        case "C":
+            display2.textContent = "Hit";
+            player.boardstate[x] = "X"
+            player.shipC[3] -=1;
+            player.Health -=1;
+        if (player.shipC[3] <= 0){
+            display2.textContent = "Destroyer Sunk"
+        }
+        player.Ammo-=1;
+            break;
+        case "D":
+            display2.textContent = "Hit";;
+            player.boardstate[x] = "X"
+            player.shipD[5] -=1;
+            player.Health -=1;
+        if (player.shipD[5] <= 0){
+            display2.textContent = "Ship Sunk";
+        }
+        player.Ammo-=1;
+            break;
+        case "E":
+        display2.textContent = "Hit";;
+        player.boardstate[x] = "X";
+        player.shipE[6] -=1;
+        player.Health -=1;
+        if (player.shipE[6] <= 0){
+            display2.textContent = "Carrier Sunk";
+        }
+        player.Ammo-=1
+        break;
+        default:
+        display2.textContent = "Already shot at, please select another tile";
         }
     }
+
 player.placement(5,"shipA","Hori")
 player.placement(48,"shipE","Vert")
 player.placement(8,"shipC","Hori")
 player.placement(76,"shipD", "Vert")
 player.placement(22, "shipB", "Hori")
 
-handler.setAmmo()
 
-//const board = Array.length(10) player.boardstate.map
-console.log(player.shipA)
-console.log(player.shipB)
-console.log(player.shipC)
-console.log(player.shipD)
-console.log(player.shipE)
-console.log(player.ammo)
-gameState.fireloop()
-
-// console.log(player.boardstate)
-// console.log(player.Health)
 

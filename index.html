@@ -5,9 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleships</title>
     <script defer src="./app.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css">
     <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-    
+  <h1 class="title">Battleships</h1>
+    <h2>
+      <div id="pregame">
+      <div class="input">Starting Ammo:</div>
+        <h6>You may set your ammocount here [1-80]</h6>
+        <input 
+          type="number"
+          id="ammoinputbox"
+          min="1"
+          max="80"
+          value="20"
+          /> 
+        <button id="ammoinput">Submit</button>
+        <div class="row">
+      <button id="startgame">Click here to start the game</button>
+      </div>
+    </div>
+    </h2>
+
+    <div id="gameboard" class="hidden">
+    <h3 class="display">Ammo Count</h3>
+    <h3 class="display2">Click to shoot</h3>
+    <div id="fullboard">
+        <div class="row" id="board">
+            <div class="tile number">0</div>
+            <div class="tile number">1</div>
+            <div class="tile number">2</div>
+            <div class="tile number">3</div>
+            <div class="tile number">4</div>
+            <div class="tile number">5</div>
+            <div class="tile number">6</div>
+            <div class="tile number">7</div>
+            <div class="tile number">8</div>
+            <div class="tile number">9</div>
+        </div>
+         <div class="row" id="board">
+            <div class="tile number">10</div>
+            <div class="tile number">11</div>
+            <div class="tile number">12</div>
+            <div class="tile number">13</div>
+            <div class="tile number">14</div>
+            <div class="tile number">15</div>
+            <div class="tile number">16</div>
+            <div class="tile number">17</div>
+            <div class="tile number">18</div>
+            <div class="tile number">19</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">20</div>
+            <div class="tile number">21</div>
+            <div class="tile number">22</div>
+            <div class="tile number">23</div>
+            <div class="tile number">24</div>
+            <div class="tile number">25</div>
+            <div class="tile number">26</div>
+            <div class="tile number">27</div>
+            <div class="tile number">28</div>
+            <div class="tile number">29</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">30</div>
+            <div class="tile number">31</div>
+            <div class="tile number">32</div>
+            <div class="tile number">33</div>
+            <div class="tile number">34</div>
+            <div class="tile number">35</div>
+            <div class="tile number">36</div>
+            <div class="tile number">37</div>
+            <div class="tile number">38</div>
+            <div class="tile number">39</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">40</div>
+            <div class="tile number">41</div>
+            <div class="tile number">42</div>
+            <div class="tile number">43</div>
+            <div class="tile number">44</div>
+            <div class="tile number">45</div>
+            <div class="tile number">46</div>
+            <div class="tile number">47</div>
+            <div class="tile number">48</div>
+            <div class="tile number">49</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">50</div>
+            <div class="tile number">51</div>
+            <div class="tile number">52</div>
+            <div class="tile number">53</div>
+            <div class="tile number">54</div>
+            <div class="tile number">55</div>
+            <div class="tile number">56</div>
+            <div class="tile number">57</div>
+            <div class="tile number">58</div>
+            <div class="tile number">59</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">60</div>
+            <div class="tile number">61</div>
+            <div class="tile number">62</div>
+            <div class="tile number">63</div>
+            <div class="tile number">64</div>
+            <div class="tile number">65</div>
+            <div class="tile number">66</div>
+            <div class="tile number">67</div>
+            <div class="tile number">68</div>
+            <div class="tile number">69</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">70</div>
+            <div class="tile number">71</div>
+            <div class="tile number">72</div>
+            <div class="tile number">73</div>
+            <div class="tile number">74</div>
+            <div class="tile number">75</div>
+            <div class="tile number">76</div>
+            <div class="tile number">77</div>
+            <div class="tile number">78</div>
+            <div class="tile number">79</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">80</div>
+            <div class="tile number">81</div>
+            <div class="tile number">82</div>
+            <div class="tile number">83</div>
+            <div class="tile number">84</div>
+            <div class="tile number">85</div>
+            <div class="tile number">86</div>
+            <div class="tile number">87</div>
+            <div class="tile number">88</div>
+            <div class="tile number">89</div>
+        </div>
+          <div class="row" id="board">
+            <div class="tile number">90</div>
+            <div class="tile number">91</div>
+            <div class="tile number">92</div>
+            <div class="tile number">93</div>
+            <div class="tile number">94</div>
+            <div class="tile number">95</div>
+            <div class="tile number">96</div>
+            <div class="tile number">97</div>
+            <div class="tile number">98</div>
+            <div class="tile number">99</div>
+        </div>
+    </div>
+  </div>
+  <h2>
+    <div id="Loss" class="hidden">Game Over
+    <h3>You ran out of shots</h3>
+    </div>
+    <div id="Win" class="hidden">Game Over
+      <h3>You Win!</h3>
+    </div>
+    <button id="Restart" class="hidden">Play Again?</button>
+  </h2>
+  
 </body>
 </html>
