@@ -1,59 +1,35 @@
 # Battleships
+Getting started: 
 
-function u (amin,b,c){
-    const randnum = Math.floor(Math.random()*(b-amin+1))+amin;
-    if (randnum !== c){
-        return randnum
-    }
-    else {
-        return u (amin,b,c)    
-    }
-}
+A normal game of battleships involves either 2 players or a player and a computer taking turns to fire on a 10x10 board, in an attempt to take out the other player/computer's placed ships. While that remains a strech goal, the current implementation is a significantly simplified game, where the player is given a limited number of shots to eliminate all ships on the board
 
-const fruits = ['apple', 'banana', 'mango', 'guava'];
-const searchValue = 'banana';
+Instructions:
+Input your desired amount of starting ammo.(Default:40)
+Click start to start game
+Click on board to launch attacks
+Attempt to sink all ships before you run out of ammo.
 
-// Check if 'banana' exists in the fruits array
-if (fruits.includes(searchValue)) {
-  console.log(`${searchValue} is in the array.`); // Output: banana is in the array.
-} else {
-  console.log(`${searchValue} is not in the array.`);
-}
-~~~
-workingarr =   [0,1,2,3,4,5,6,7,8,
-                10,11,12,13,14,15,16,17,18
-                20,21,22,23,24,25,26,27,28
-                30,31,32,33,34,35,36,37,38
-                40
-                50,
-                60
-                70
-                80
-                90]
+Pseudocode:
+Input Ammocount (This is the number of ammo the player will start with, with a default value)
+Input Start (To begain the game)
+Generate ship location
+Input Shot location (Player clicks to fire)
+Output Hit or Miss (Game should be able to respond if shot is a hit or miss)
+Repeat previous 2 steps (Game should not terminate suddenly, instead looping the previous 2 steps until the following)
+Output Win or Lose (Game should terminate and tell the player if they have won or lost)
 
-temparr = []
+Current Implementation is 'playable' at https://2l0t2k0.github.io/Battleships/ 
 
 
+Attributions: CSS: Sakura (https://oxal.org/projects/sakura/)
 
-const generateplacement() =>{
 
-    //for each generated item in playerlist 
-    const direction = Math.round(Math.random())//if 0, direct is hori and vice versa
-    //check item's array[0], to indicate shiptype
-    //depending on shiptype: 
-    //   const filterset = new Set(ShipXDirect) //shipXDirect is array tailored to each shiptype and orientation
-    // temparr = workingarr.filter(item => !filterSet.has(item)) 
+Technologies used: JavaScript, HTML, CSS
 
-    //code below is for vertical carrier
-   
-    const start = function(0,98,temparr){
-    const randnum = Math.floor(Math.random()*(98-0+1))+0//randnumbetween 0 and 98
-            if (temparr.includes(randnum) && temparr.includes(randnum+10) && temparr.includes(randnum+20) && temparr.includes(randnum-20) && temparr.includes(randnum-20)){
-            return randnum
-        }
-        else {
-            return start(0,98,temparr)}
-        }}
-   
 
-    
+Next steps: Full rewrite of entire codebase.
+            Complete random generation of ship deployment
+            Option to vary ship composition
+            Ship tracker while in game
+            Viable 2 player Hotseat
+            Viable Player vs Computer
