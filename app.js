@@ -17,7 +17,7 @@ shipC: [],//2x1
 shipD: [],//4x1
 shipE: [],//5x1
 Health: 17,
-Ammo: 20,
+Ammo: 40,
 
 placement(x, shiptype, rotate) {
     switch(shiptype){
@@ -235,7 +235,7 @@ player.boardstate = [0,0,0,0,0,0,0,0,0,0,
     player.shipC = []//2x1
     player.shipD= []//4x1
     player.shipE= []//5x1
-    player.Ammo = 20
+    player.Ammo = 40
     player.Health = 17
 }}
 
@@ -258,9 +258,9 @@ const win = document.getElementById("Win")
 const restart = document.getElementById("Restart")
 /*----------------------------- Event Listeners -----------------------------*/
 ammoinput.addEventListener("click", () =>{
-player.Ammo = document.querySelector("#ammoinputbox").value
-console.log(player.Ammo)
-displayplayerammo()
+    player.Ammo = document.querySelector("#ammoinputbox").value
+    console.log(player.Ammo)
+    displayplayerammo()
 } )
 
 startgame.addEventListener("click", () =>{    
@@ -276,11 +276,11 @@ restart.addEventListener("click", ()=>{
     loss.classList.add("hidden")
     win.classList.add("hidden")
     player.placement(5,"shipA","Hori")
-player.placement(48,"shipE","Vert")
-player.placement(8,"shipC","Hori")
-player.placement(76,"shipD", "Vert")
-player.placement(22, "shipB", "Hori")
-displayplayerammo()
+    player.placement(48,"shipE","Vert")
+    player.placement(8,"shipC","Hori")
+    player.placement(76,"shipD", "Vert")
+    player.placement(22, "shipB", "Hori")
+    displayplayerammo()
 })
 
 
@@ -393,6 +393,8 @@ const fire = function(x){
         }
     }
 
+
+//Ship locations are currently hardcoded
 player.placement(5,"shipA","Hori")
 player.placement(48,"shipE","Vert")
 player.placement(8,"shipC","Hori")
